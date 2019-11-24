@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="container">
+        <form onsubmit="return confirm('voulez-vous vraiment modifier ?');" method="post" action="{{ path('Depense.validEditDepense') }}">
+            <legend>Modifier une depense</legend>
+            <div class="form-group">
+                <label>Montant :</label>
+                <input name="montant"  type="text"  size="18" value="{{donnees.montant|default('')}}" class="form-control" >
+                {% if erreurs.montant is defined %}
+                    <div class="invalid-feedback">{{erreurs.montant}}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label>Description :</label>
+                <input name="description"  type="text"  size="255" value="{{donnees.description|default('')}}" class="form-control" >
+            </div>
+            <div class="form-group">
+                <label>Date Depense :</label>
+                <input name="dateDepense"  type="date" size="18" value="{{donnees.dateDepense| date('d-m-Y') |default('') }}" placeholder="d-m-Y" class="form-control" >
+                {% if erreurs.dateDepense is defined %}
+                    <div class="invalid-feedback">{{erreurs.dateDepense}}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label>Categorie Depense Id :</label>
+                <select name="categorieDepense_id" class="form-control">
+                    {% if  donnees.categorieDepense_id is not defined or donnees.categorieDepense_id is empty   %}
+                        <option value="">Veuillez sélectionner une Depense</option>
+                    {% endif %}
+                    {% for categorieDepense in categorieDepenses %}
+                        <option value="{{categorieDepense.id|default('')}}"
+                            {% if donnees.categorieDepense_id is defined and categorieDepense == donnees.categorieDepense_id %}selected{% endif %}>
+                            {{ categorieDepense.libelle }}
+                        </option>
+                    {% endfor %}
+                </select>
+                {% if erreurs.cateforieDepense_id is defined %}
+                    <div class="invalid-feedback">{{erreurs.categorieDepense_id}}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <input name="Id"  type="hidden"  size="18" value="{{donnees.id|default('')}}" class="form-control" >
+                <input type="hidden" name="token" value="{{ csrf_token('edit_valid') }}">
+            </div>
+            <button type="submit" class="btn btn-primary">{{ button|default('Valider') }}</button>
+        </form>
+    </div>
+{% endblock %}

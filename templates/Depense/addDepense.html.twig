@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="container">
+        <form method="post" action="{{ path('Depense.validAddDepense') }}">
+            <legend>Créer une depense</legend>
+            <div class="form-group">
+                <label>Montant :</label>
+                <input name="montant"  type="text"  size="18" value="{{donnees.montant|default('')}}" class="form-control" >
+                {% if erreurs.montant is defined %}
+                    <div class="invalid-feedback d-block">{{erreurs.montant}}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label>Description :</label>
+                <input name="description"  type="text"  size="255" value="{{donnees.description|default('')}}" class="form-control" >
+            </div>
+            <div class="form-group">
+                <label>Date Depense :</label>
+                <input name="dateDepense"  type="date" size="18" value="{{donnees.dateDepense|default('')}}" placeholder="d-m-Y" class="form-control">
+                {% if erreurs.dateDepense is defined %}
+                    <div class="invalid-feedback d-block">{{erreurs.dateDepense}}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label>Categorie Depense Id :</label>
+                <select name="categorieDepense_id" class="form-control">
+                        <option value="">Veuillez sélectionner une Depense</option>
+                    {% for categorieDepense in categorieDepenses %}
+                        <option value="{{ categorieDepense.id }}">
+                            {{ categorieDepense.libelle }}
+                        </option>
+                    {% endfor %}
+                </select>
+                {% if erreurs.cateforieDepense_id is defined %}
+                    <div class="invalid-feedback">{{erreurs.categorieDepense_id}}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <input name="Id"  type="hidden"  size="18" value="{{donnees.id|default('')}}" class="form-control" >
+                <input type="hidden" name="token" value="{{ csrf_token('formulaire_produit_valide') }}">
+            </div>
+            <button type="submit" class="btn btn-primary">{{ button|default('Valider') }}</button>
+        </form>
+    </div>
+{% endblock %}

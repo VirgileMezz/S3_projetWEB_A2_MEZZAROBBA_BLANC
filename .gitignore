@@ -1,0 +1,14 @@
+assets
+bin
+config
+node_modules
+translations
+var
+vendor
+composer.json
+composer.lock
+package.json
+phpunit.xml.dist
+symfony.lock
+webpack.config.js
+yarn.lock

@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="container">
+        <div>
+            <table class="table">
+                {% if session is defined %}
+                {% if session.role=='ADMIN' %}
+                <a href="{{ path('Depense.addDepense') }}" class="btn btn-primary m-1 p-1">Ajouter une depense</a>
+                {% endif %}
+                {% endif %}
+                <caption class="h3">Recapitulatifs des depenses</caption>
+                <thead class="thead-dark">
+                <tr><th>montant</th><th>description</th><th>dateDepense</th><th>categorieDepense_id</th><th>id</th>
+                    {%  if session is defined %}
+                        {% if session.role=='ADMIN' %}
+                            <th>opération</th>
+                        {% endif %}
+                    {% endif %}
+                </tr>
+                </thead>
+                {% for depense in depenses if depenses is not empty %}
+                <tbody>
+                <tr>
+                    <td style="color: red;">{{ depense.getMontant() }} €</td>
+                    <td>{{ depense.getDescription() }}</td>
+                    <td>{{ depense.getDateDepense() | date('d-m-Y')}}</td>
+                    <td style="color: green;">{{ depense.categorieDepense.libelle | default("id Null")}}</td>
+                    <td>{{ depense.getId() }}</td>
+                    <td>
+                        {% if session is defined %}
+                            {% if session.role=='ADMIN' %}
+                            <div style="display: inline-flex">
+                                 <a href="{{ path('Depense.editDepense',{id: depense.getId()}) }}" class="btn btn-primary" style="margin-left: 20%">Modifier</a>
+                                 <form onsubmit="return confirm('Voulez-vous vraiment supprimer cette dépense ?');"
+                                      action="{{ path('Depense.deleteDepense',{id: depense.getId()}) }}" method="POST">
+                                    <input type="hidden" name="token" value="{{ csrf_token('delete_valid') }}">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-primary" style="margin-left: 30%" >Supprimer</button>
+                                </form>
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                    <tr class="table-warning"><td>Pas de depenses</td></tr>
+                {% endfor %}
+                <tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

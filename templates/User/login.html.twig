@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="container">
+        <form method="post" action="{{ path('Security.validLogin') }}">
+            <legend>Connexion</legend>
+            <div class="form-group">
+                <label>username :</label>
+                <input name="username"  type="text"  size="18" value="{{donnees.username|default('')}}" class="form-control" >
+                {% if erreurs.username is defined %}
+                    <div class="invalid-feedback d-block">{{erreurs.username}}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label>password :</label>
+                <input name="password"  type="password"  size="255" value="" class="form-control" >
+                {% if erreurs.password is defined %}
+                    <div class="invalid-feedback d-block">{{erreurs.password}}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="token" value="{{ csrf_token('formulaire_login_valide') }}">
+            </div>
+            <button type="submit" class="btn btn-primary">{{ button|default('Se connecter') }}</button>
+        </form>
+    </div>
+{% endblock %}
