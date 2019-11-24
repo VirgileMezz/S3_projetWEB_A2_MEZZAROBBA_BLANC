@@ -20,7 +20,7 @@ class SecurityController extends AbstractController
      */
    public function login(Request $request, Environment $twig, RegistryInterface $doctrine) {
 
-       return new Response($twig->render('User/login.html.twig'));
+       return new Response($twig->render('login.html.twig'));
    }
 
     /**
@@ -40,18 +40,18 @@ class SecurityController extends AbstractController
 
         if(empty($user)) {
             $erreurs['username']='Incorrect username';
-            return $this->render('User/login.html.twig',['donnees'=>$donnees,'erreurs'=>$erreurs]);
+            return $this->render('login.html.twig',['donnees'=>$donnees,'erreurs'=>$erreurs]);
         }
         if($user->getPassword()!=$donnees['password']) {
             $erreurs['password']='Incorrect password';
-            return $this->render('User/login.html.twig',['donnees'=>$donnees,'erreurs'=>$erreurs]);
+            return $this->render('login.html.twig',['donnees'=>$donnees,'erreurs'=>$erreurs]);
         }
 
         $_SESSION['username']=$user->getUsername();
         $_SESSION['role']=$user->getRole();
 
 
-        return $this->redirectToRoute('Depense.showDepenses');
+        return $this->redirectToRoute('Evenement.showEvenement');
     }
     /**
      * @Route("/logout", name="Security.logout",methods={"GET"})
@@ -60,7 +60,7 @@ class SecurityController extends AbstractController
 
         $_SESSION['username']=null;
         $_SESSION['role']=null;
-        return $this->redirectToRoute('Depense.showDepenses');
+        return $this->redirectToRoute('Evenement.showEvenement');
     }
 
 }
