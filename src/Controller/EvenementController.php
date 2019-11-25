@@ -56,7 +56,7 @@ class EvenementController extends AbstractController
     public function validAddEvenement(Request $request, Environment $twig, RegistryInterface $doctrine)
     {
 
-        if(!$this->isCsrfTokenValid('formulaire_evenement_valide', $request->get('token'))) {
+        if(!$this->isCsrfTokenValid('add_valid', $request->get('token'))) {
             throw new InvalidCsrfTokenException('Invalid CSRF token');
         }
         $donnees['nom']=htmlspecialchars($_POST['nom']);
@@ -65,10 +65,10 @@ class EvenementController extends AbstractController
         $donnees['nbPlaces']=htmlspecialchars($_POST['nbPlaces']);
         $donnees['dateEvenement']=htmlentities($request->request->get('dateEvenement'));
         $donnees['description']=htmlspecialchars($_POST['description']);
-        $donnees['categorie_id']=htmlentities($request->request->get('categorie_id'));
+        $donnees['categorie']=htmlentities($request->request->get('categorie'));
 
-        if($donnees['nbPlaces']>0) $donnees['disponible']=1;
-        else $donnees['disponible']=0;
+        if($donnees['nbPlaces']>0) $donnees['disponible']=true;
+        else $donnees['disponible']=false;
 
         $erreurs=$this->validDonnees($donnees);
 
@@ -86,7 +86,7 @@ class EvenementController extends AbstractController
             $evenement->setNombrePlaces( $donnees['nbPlaces']);
             $evenement->setDescription($donnees['description']);
             $evenement->setDate(new \DateTime($donnees['dateEvenement']));
-            $categorie = $doctrine->getRepository(Categorie::class)->findOneBy(['id' => $donnees['categorie_id']]);
+            $categorie = $doctrine->getRepository(Categorie::class)->findOneBy(['id' => $donnees['categorie']]);
             $evenement->setCategorie($categorie);
             $doctrine->getEntityManager()->persist($evenement);
             $doctrine->getEntityManager()->flush();
@@ -125,7 +125,7 @@ class EvenementController extends AbstractController
         $donnees['prix']=$evenement->getPrix();
         $donnees['photo']=$evenement->getPhoto();
         $donnees['nbPlaces']=$evenement->getNombrePlaces();
-        $donnees['date']=$evenement->getDate();
+        $donnees['dateEvenement']=$evenement->getDate();
         $donnees['description']=$evenement->getDescription();
         $donnees['categorie'] = $evenement->getCategorie();
         $categorie=$doctrine->getRepository(Categorie::class)->findAll([],['id'=>'ASC']);
@@ -147,16 +147,16 @@ class EvenementController extends AbstractController
         $donnees['prix']=htmlspecialchars($_POST['prix']);
         $donnees['photo']=htmlspecialchars($_POST['photo']);
         $donnees['nbPlaces']=htmlspecialchars($_POST['nbPlaces']);
-        $donnees['date']=htmlentities($request->request->get('date'));
+        $donnees['dateEvenement']=htmlentities($request->request->get('dateEvenement'));
         $donnees['description']=htmlspecialchars($_POST['description']);
-        $donnees['categorie_id']=htmlentities($request->request->get('categorie_id'));
+        $donnees['categorie']=htmlentities($request->request->get('categorie'));
 
         $erreurs=$this->validDonnees($donnees);
 
         if(! empty($erreurs))
         {
             $categorie=$doctrine->getRepository(Categorie::class)->findAll([],['id'=>'ASC']);
-            return $this->render('', ['donnees'=>$donnees,'erreurs'=>$erreurs,'categorie'=> $categorie]);
+            return $this->render('Evenement/editEvent.html.twig', ['donnees'=>$donnees,'erreurs'=>$erreurs,'categorie'=> $categorie]);
         }else {
 
             $evenement = $doctrine->getRepository(Evenement::class)->findOneBy(['id' => $id]);
@@ -165,8 +165,8 @@ class EvenementController extends AbstractController
             $evenement->setPhoto( $donnees['photo']);
             $evenement->setNombrePlaces( $donnees['nbPlaces']);
             $evenement->setDescription($donnees['description']);
-            $evenement->setDate(new \DateTime($donnees['date']));
-            $categorie = $doctrine->getRepository(Categorie::class)->findOneBy(['id' => $donnees['categorie_id']]);
+            $evenement->setDate(new \DateTime($donnees['dateEvenement']));
+            $categorie = $doctrine->getRepository(Categorie::class)->findOneBy(['id' => $donnees['categorie']]);
             $evenement->setCategorie($categorie);
             $doctrine->getEntityManager()->persist($evenement);
             $doctrine->getEntityManager()->flush();
@@ -182,8 +182,8 @@ class EvenementController extends AbstractController
             $erreurs['prix'] = 'saisissez une valeur numérique';
        // if (!is_numeric(strtotime($donnees['dateEvenement'])))
        //     $erreurs['dateEvenement']= 'saisissez une date correct selon le format Y-m-d';
-        if (!is_numeric($donnees['categorie_id']))
-            $erreurs['categoride_id'] = 'veuillez saisir une valeur';
+        if (!is_numeric($donnees['categorie']))
+            $erreurs['categorie'] = 'veuillez saisir une valeur';
         return $erreurs;
     }
 }

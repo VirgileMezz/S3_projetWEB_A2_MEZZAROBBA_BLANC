@@ -1,0 +1,59 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="container">
+        <div>
+            <h2 style="text-align: center">Récapitulatif des Evenements</h2>
+            <table class="table">
+                {% if session is defined %}
+                {% if session.role=='ROLE_ADMIN' %}
+                <a href="{{ path('evenement.add') }}" class="btn btn-primary m-1 p-1">Ajouter un Evenement</a>
+                {% endif %}
+                {% endif %}
+                <thead class="thead-dark">
+                <tr><th>Nom</th><th>Categorie</th><th>Date</th><th>Description</th><th>Nom Photo</th><th>Photo</th>
+                    <th>Nombres de Places</th><th>Prix</th>
+                    {%  if session is defined %}
+                        {% if session.role=='ROLE_ADMIN' or session.role=='ROLE_CLIENT' %}
+                            <th>Opération</th>
+                        {% endif %}
+                    {% endif %}
+                </tr>
+                </thead>
+                {% for evenement in evenements if evenements is not empty %}
+                <tbody>
+                <tr>
+                    <td style="color: green; font-weight: bold">{{ evenement.getNom() }}</td>
+                    <td>{{ evenement.categorie.libelle }}</td>
+                    <td style="color: blue;">{{ evenement.getDate() | date('d-m-Y')}}</td>
+                    <td>{{ evenement.getDescription() }}</td>
+                    <td>{{ evenement.getPhoto()}}</td>
+                    <td>  <img style="width:40px;height:40px" src="{{asset('images/')}}{{evenement.photo}}" alt="image de {{evenement.nom}}" ></td>
+                    <td>{{ evenement.getNombrePlaces }}</td>
+                    <td style="color: red;">{{ evenement.getPrix() }}€</td>
+                    <td>
+                        {% if session is defined %}
+                            {% if session.role=='ROLE_ADMIN' %}
+                            <div style="display: inline-flex">
+                                 <a href="{{ path('evenement.edit',{id: evenement.getId()}) }}" class="btn btn-primary" >Modifier</a>
+                                 <form onsubmit="return confirm('Voulez-vous vraiment supprimer cet Evenement ?');"
+                                      action="{{ path('evenement.delete',{id: evenement.getId()}) }}" method="POST">
+                                    <input type="hidden" name="token" value="{{ csrf_token('delete_valid') }}">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-primary" style="margin-left: 10%" >Supprimer</button>
+                                </form>
+                            </div>
+                            {% endif %}
+                            {% if session.role=='ROLE_CLIENT' %}
+                                <a href="{#{{ path('panier.ajout',{id: evenement.getId()}) }}#}" class="btn btn-primary" >Ajouter au Panier</a>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                    <tr class="table-warning"><td>Pas d'Evenements</td></tr>
+                {% endfor %}
+                <tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

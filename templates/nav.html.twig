@@ -1,24 +1,6 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark pink scrolling-navbar" style="text-align: center; background-color: darkgray;  height: 100px;" >
-                 {%  if session is defined %}
-        {% if session.role=='ADMIN' %}
-            <li class="nav-item dropdown" style="margin-left: 11%; background-color: white">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Affichage
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <div class="dropdown-item">
-                        <a class="btn btn-primary m-1 p-1" href="{{ path('Depense.showDepenses') }}">Afficher les dépenses</a>
-                    </div>
-                    <div class="dropdown-item">
-                        <a class="btn btn-primary m-1 p-1" href="{{ path('CategorieDepense.showCategorieDepenses') }}">Afficher les types de dépenses</a>
-                    </div>
-                </div>
-            </li>
-            {% else %}
-                <div style="margin-left: 18%"></div>
-        {% endif %}
-    {% endif %}
-    <div style="margin-left: 61%; background-color: white">
+    <img src="{{ asset('images/monLogo.png') }}" style="width: 250px; height: 80px; margin-left: 40%">
+    <div style="margin-left: 20%; background-color: white">
         {% if session is defined %}
                 {% if session.username==null %}
                         <a class="btn btn-outline-success my-2 my-sm-0" href="{{ path('Security.login') }}">Se Connecter</a>
