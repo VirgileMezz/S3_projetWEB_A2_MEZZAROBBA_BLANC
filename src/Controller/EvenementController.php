@@ -21,8 +21,9 @@ class EvenementController extends AbstractController
      */
     public function index(Environment $twig)
     {
-        if(!$_SESSION)
-             session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         $_SESSION['username']=null;
         $_SESSION['role']=null;
         return $this->redirectToRoute('Evenement.showEvenement');
@@ -74,8 +75,8 @@ class EvenementController extends AbstractController
 
         if(! empty($erreurs))
         {
-            echo "fail";
             $categorie=$doctrine->getRepository(Categorie::class)->findAll([],['id'=>'ASC']);
+            $this->addFlash('error', 'des champs sont mal renseignés !');
             return $this->render('Evenement/addEvent.html.twig', ['donnees'=>$donnees,'erreurs'=>$erreurs,'categorie'=> $categorie]);
         }else {
             $evenement = new Evenement();
@@ -156,6 +157,7 @@ class EvenementController extends AbstractController
         if(! empty($erreurs))
         {
             $categorie=$doctrine->getRepository(Categorie::class)->findAll([],['id'=>'ASC']);
+            $this->addFlash('error', 'des champs sont mal renseignés !');
             return $this->render('Evenement/editEvent.html.twig', ['donnees'=>$donnees,'erreurs'=>$erreurs,'categorie'=> $categorie]);
         }else {
 
@@ -178,8 +180,12 @@ class EvenementController extends AbstractController
 
     private function validDonnees($donnees) {
         $erreurs = array();
+        if($donnees['nom']=="")
+            $erreurs['nom'] = 'saisissez un nom';
         if (!is_numeric($donnees['prix']))
             $erreurs['prix'] = 'saisissez une valeur numérique';
+        if (!is_numeric($donnees['nbPlaces']))
+            $erreurs['nbPlaces'] = 'saisissez une valeur numérique';
        // if (!is_numeric(strtotime($donnees['dateEvenement'])))
        //     $erreurs['dateEvenement']= 'saisissez une date correct selon le format Y-m-d';
         if (!is_numeric($donnees['categorie']))

@@ -24,6 +24,11 @@
         {{ message }}
     </div>
 {% endfor %}
+{% for message in app.flashes('error') %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+{% endfor %}
 <div class="container">
     {% block body %}{% endblock %}
 </div><!-- /.container -->
@@ -32,5 +37,9 @@
 <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 {% block javascripts %}{% endblock %}
 </body>
-<footer style="background-color: darkgray; height: 100px"></footer>
+<footer style="background-color: darkgray; height: 100px">
+    By Evan BLANC<br>
+       & <br>
+    Virgile MEZZAROBBA
+</footer>
 </html>

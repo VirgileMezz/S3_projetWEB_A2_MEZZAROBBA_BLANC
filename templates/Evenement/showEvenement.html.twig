@@ -10,8 +10,9 @@
                 {% endif %}
                 {% endif %}
                 <thead class="thead-dark">
-                <tr><th>Nom</th><th>Categorie</th><th>Date</th><th>Description</th><th>Nom Photo</th><th>Photo</th>
-                    <th>Nombres de Places</th><th>Prix</th>
+                <tr><th style="width: 180px">Nom</th><th>Categorie</th><th style="width: 100px">Date</th>
+                    <th style="width: 250px">Description</th><th style="padding-left: 4%;">Nom Photo</th><th>Photo</th>
+                    <th style="width: 100px">Nombres de Places</th><th style="width: 100px">Prix</th>
                     {%  if session is defined %}
                         {% if session.role=='ROLE_ADMIN' or session.role=='ROLE_CLIENT' %}
                             <th>Opération</th>
@@ -21,7 +22,7 @@
                 </thead>
                 {% for evenement in evenements if evenements is not empty %}
                 <tbody>
-                <tr>
+                <tr style="text-align: center">
                     <td style="color: green; font-weight: bold">{{ evenement.getNom() }}</td>
                     <td>{{ evenement.categorie.libelle }}</td>
                     <td style="color: blue;">{{ evenement.getDate() | date('d-m-Y')}}</td>
@@ -29,7 +30,7 @@
                     <td>{{ evenement.getPhoto()}}</td>
                     <td>  <img style="width:40px;height:40px" src="{{asset('images/')}}{{evenement.photo}}" alt="image de {{evenement.nom}}" ></td>
                     <td>{{ evenement.getNombrePlaces }}</td>
-                    <td style="color: red;">{{ evenement.getPrix() }}€</td>
+                    <td style="color: red;">{{ evenement.getPrix() | default('--') }}€</td>
                     <td>
                         {% if session is defined %}
                             {% if session.role=='ROLE_ADMIN' %}
@@ -39,7 +40,7 @@
                                       action="{{ path('evenement.delete',{id: evenement.getId()}) }}" method="POST">
                                     <input type="hidden" name="token" value="{{ csrf_token('delete_valid') }}">
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" class="btn btn-primary" style="margin-left: 10%" >Supprimer</button>
+                                    <button type="submit" class="btn btn-primary" style="margin-left: 9%" >Supprimer</button>
                                 </form>
                             </div>
                             {% endif %}
