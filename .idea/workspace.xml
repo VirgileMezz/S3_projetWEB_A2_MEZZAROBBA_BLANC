@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aad35267-de12-4dfc-8764-e7946ab46d13" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/Evenement/showEventUser.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/EvenementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EvenementController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Evenement/addEvent.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Evenement/addEvent.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Evenement/editEvent.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Evenement/editEvent.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Evenement/showEvenement.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Evenement/showEvenement.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Evenement/showEvenement.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Evenement/showEventAdmin.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,17 +21,48 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/Evenement/showEvenement.html.twig">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/Evenement/showEventAdmin.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="685">
-              <caret line="58" column="20" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="20" />
+            <state>
+              <caret selection-end-line="4" selection-end-column="76" />
               <folding>
                 <element signature="n#style#0;n#h2#0;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#th#3;n#tr#0;n#thead#0;n#table#0;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/nav.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="47" selection-start-line="4" selection-start-column="47" selection-end-line="4" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/Evenement/showEventUser.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="118" selection-start-line="15" selection-start-column="118" selection-end-line="15" selection-end-column="118" />
+              <folding>
+                <element signature="e#106#144#0#HTML" expanded="true" />
+                <element signature="e#83#106#0#HTML" expanded="true" />
+                <element signature="e#146#240#0#HTML" expanded="true" />
+                <element signature="e#1042#1078#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/EvenementController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="37" column="52" selection-start-line="37" selection-start-column="52" selection-end-line="37" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -51,16 +81,18 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/templates/Evenement/showEvenements.html.twig" />
-        <option value="$PROJECT_DIR$/templates/nav.html.twig" />
         <option value="$PROJECT_DIR$/templates/Evenement/addEvenement.html.twig" />
         <option value="$PROJECT_DIR$/templates/Evenement/editDepense.html.twig" />
         <option value="$USER_HOME$/bin/A2_BLANC_Evan/templates/TypeDepense/showCategorieDepenses.html.twig" />
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$USER_HOME$/bin/A2_BLANC_Evan/templates/Depense/showDepenses.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/EvenementController.php" />
         <option value="$PROJECT_DIR$/templates/Evenement/editEvent.html.twig" />
         <option value="$PROJECT_DIR$/templates/Evenement/addEvent.html.twig" />
         <option value="$PROJECT_DIR$/templates/Evenement/showEvenement.html.twig" />
+        <option value="$PROJECT_DIR$/templates/Evenement/showEventAdmin.html.twig" />
+        <option value="$PROJECT_DIR$/templates/nav.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/EvenementController.php" />
+        <option value="$PROJECT_DIR$/templates/Evenement/showEventUser.html.twig" />
       </list>
     </option>
   </component>
@@ -281,12 +313,12 @@
       <updated>1574665556307</updated>
       <workItem from="1574665557947" duration="10474000" />
       <workItem from="1574778252382" duration="133000" />
-      <workItem from="1574778477256" duration="4014000" />
+      <workItem from="1574778477256" duration="5677000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14621000" />
+    <option name="totallyTimeSpent" value="16284000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -318,16 +350,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/nav.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="47" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="47" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#nav#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Downloads/S3_projet2_nom1_nom2/templates/backOff/Evenement/showEvenements.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -404,13 +426,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/EvenementController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1780">
-          <caret line="130" column="65" selection-start-line="130" selection-start-column="60" selection-end-line="130" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/Evenement/editEvent.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
@@ -428,15 +443,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Evenement/showEvenement.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/Evenement/showEventAdmin.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="685">
-          <caret line="58" column="20" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="20" />
+        <state>
+          <caret selection-end-line="4" selection-end-column="76" />
           <folding>
             <element signature="n#style#0;n#h2#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#th#3;n#tr#0;n#thead#0;n#table#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/nav.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="47" selection-start-line="4" selection-start-column="47" selection-end-line="4" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/EvenementController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="37" column="52" selection-start-line="37" selection-start-column="52" selection-end-line="37" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Evenement/showEventUser.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="118" selection-start-line="15" selection-start-column="118" selection-end-line="15" selection-end-column="118" />
+          <folding>
+            <element signature="e#106#144#0#HTML" expanded="true" />
+            <element signature="e#83#106#0#HTML" expanded="true" />
+            <element signature="e#146#240#0#HTML" expanded="true" />
+            <element signature="e#1042#1078#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -34,12 +34,17 @@ class EvenementController extends AbstractController
      */
     public function showEvenement(Request $request, Environment $twig, RegistryInterface $doctrine)
     {
-        if($_SESSION)
+       if($_SESSION)
              $twig->addGlobal('session', $_SESSION);
         $evenement=NULL;
         $evenement=$doctrine->getRepository(Evenement::class)->findAll([],['date'=>'ASC']);
         dump($evenement);
-        return new Response($twig->render('Evenement/showEvenement.html.twig', ['evenements' => $evenement]));
+        if($_SESSION['role']=='ROLE_ADMIN')
+            return new Response($twig->render('Evenement/showEventAdmin.html.twig',
+                ['evenements' => $evenement,'role' => $_SESSION['role']]));
+        else
+            return new Response($twig->render('Evenement/showEventUser.html.twig',
+                ['evenements' => $evenement,'role' => $_SESSION['role']]));
     }
 
     /**

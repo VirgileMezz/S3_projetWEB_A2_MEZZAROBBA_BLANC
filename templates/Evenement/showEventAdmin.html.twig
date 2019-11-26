@@ -1,17 +1,14 @@
 {% extends "base.html.twig" %}
 {% block body %}
-    <div class="container"s
+    <div class="container">
         <div>
-            {% if session is defined %}
-                {% if session.role=='ROLE_ADMIN' %}
-                    <h2 style="text-align: center">Récapitulatif des Evenements</h2>
+            <h2 style="text-align: center">Récapitulatif des Evenements</h2>
             <table class="table">
                 <a href="{{ path('evenement.add') }}" class="btn btn-primary m-1 p-1">Ajouter un Evenement</a>
                 <thead class="thead-dark">
                 <tr><th style="width: 180px">Nom</th><th>Categorie</th><th style="width: 100px">Date</th>
                     <th style=" width: 250px; ">Description</th><th style="padding-left: 4%;">Nom Photo</th><th>Photo</th>
-                    <th style="width: 100px">Nombres de Places</th><th style="width: 100px">Prix</th>
-                            <th>Opération</th>
+                    <th style="width: 100px">Nombres de Places</th><th style="width: 100px">Prix</th><th>Opération</th>
                 </tr>
                 </thead>
                 {% for evenement in evenements if evenements is not empty %}
@@ -42,24 +39,6 @@
                 {% endfor %}
                 <tbody>
             </table>
-            {% endif %}
-                {% for evenement in evenements if evenements is not empty %}
-                <div style="margin-top: 5%;">
-                    <div class="card" style="width: 20%; height: 20%;margin-bottom: 5%; margin-left: 2%; float: left; align: center">
-                        <img width="150px" height="200px" class="card-img-top" src="{{asset('images/')}}{{evenement.photo}}" alt="image de {{evenement.nom}}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ evenement.nom }}</h5>
-                            <p class="card-text">{{ evenement.description }}</p>
-                            {% if session.role=='ROLE_CLIENT' %}
-                                        <a href="{#{{ path('panier.ajout',{id: evenement.getId()}) }}#}" class="btn btn-primary" >Ajouter au Panier</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-                {% else %}
-                    <tr class="table-warning"><td>Pas d'Evenements</td></tr>
-                {% endfor %}
-            {% endif %}
         </div>
     </div>
 {% endblock %}
