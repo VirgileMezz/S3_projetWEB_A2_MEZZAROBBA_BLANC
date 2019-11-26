@@ -128,7 +128,7 @@ class EvenementController extends AbstractController
         $donnees['nbPlaces']=$evenement->getNombrePlaces();
         $donnees['dateEvenement']=$evenement->getDate();
         $donnees['description']=$evenement->getDescription();
-        $donnees['categorie'] = $evenement->getCategorie();
+        $donnees['categorie'] = $evenement->getCategorie()->getId();
         $categorie=$doctrine->getRepository(Categorie::class)->findAll([],['id'=>'ASC']);
 
         return $this->render('Evenement/editEvent.html.twig',['donnees'=>$donnees,'categorie'=>$categorie]);

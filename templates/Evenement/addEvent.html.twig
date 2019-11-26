@@ -58,6 +58,7 @@
                 <input type="hidden" name="token" value="{{ csrf_token('add_valid') }}">
             </div>
             <button type="submit" class="btn btn-primary">{{ button|default('Valider') }}</button>
+            <a class="btn btn-danger" href="{{ path('Evenement.showEvenement') }}">Retour</a>
         </form>
     </div>
 {% endblock %}

@@ -1,23 +1,17 @@
 {% extends "base.html.twig" %}
 {% block body %}
-    <div class="container">
+    <div class="container"s
         <div>
-            <h2 style="text-align: center">Récapitulatif des Evenements</h2>
-            <table class="table">
-                {% if session is defined %}
+            {% if session is defined %}
                 {% if session.role=='ROLE_ADMIN' %}
+                    <h2 style="text-align: center">Récapitulatif des Evenements</h2>
+            <table class="table">
                 <a href="{{ path('evenement.add') }}" class="btn btn-primary m-1 p-1">Ajouter un Evenement</a>
-                {% endif %}
-                {% endif %}
                 <thead class="thead-dark">
                 <tr><th style="width: 180px">Nom</th><th>Categorie</th><th style="width: 100px">Date</th>
-                    <th style="width: 250px">Description</th><th style="padding-left: 4%;">Nom Photo</th><th>Photo</th>
+                    <th style=" width: 250px; ">Description</th><th style="padding-left: 4%;">Nom Photo</th><th>Photo</th>
                     <th style="width: 100px">Nombres de Places</th><th style="width: 100px">Prix</th>
-                    {%  if session is defined %}
-                        {% if session.role=='ROLE_ADMIN' or session.role=='ROLE_CLIENT' %}
                             <th>Opération</th>
-                        {% endif %}
-                    {% endif %}
                 </tr>
                 </thead>
                 {% for evenement in evenements if evenements is not empty %}
@@ -32,8 +26,6 @@
                     <td>{{ evenement.getNombrePlaces }}</td>
                     <td style="color: red;">{{ evenement.getPrix() | default('--') }}€</td>
                     <td>
-                        {% if session is defined %}
-                            {% if session.role=='ROLE_ADMIN' %}
                             <div style="display: inline-flex">
                                  <a href="{{ path('evenement.edit',{id: evenement.getId()}) }}" class="btn btn-primary" >Modifier</a>
                                  <form onsubmit="return confirm('Voulez-vous vraiment supprimer cet Evenement ?');"
@@ -43,11 +35,6 @@
                                     <button type="submit" class="btn btn-primary" style="margin-left: 9%" >Supprimer</button>
                                 </form>
                             </div>
-                            {% endif %}
-                            {% if session.role=='ROLE_CLIENT' %}
-                                <a href="{#{{ path('panier.ajout',{id: evenement.getId()}) }}#}" class="btn btn-primary" >Ajouter au Panier</a>
-                            {% endif %}
-                        {% endif %}
                     </td>
                 </tr>
                 {% else %}
@@ -55,6 +42,24 @@
                 {% endfor %}
                 <tbody>
             </table>
+            {% endif %}
+                {% for evenement in evenements if evenements is not empty %}
+                <div style="margin-top: 5%;">
+                    <div class="card" style="width: 20%; height: 20%;margin-bottom: 5%; margin-left: 2%; float: left; align: center">
+                        <img width="150px" height="200px" class="card-img-top" src="{{asset('images/')}}{{evenement.photo}}" alt="image de {{evenement.nom}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ evenement.nom }}</h5>
+                            <p class="card-text">{{ evenement.description }}</p>
+                            {% if session.role=='ROLE_CLIENT' %}
+                                        <a href="{#{{ path('panier.ajout',{id: evenement.getId()}) }}#}" class="btn btn-primary" >Ajouter au Panier</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                    <tr class="table-warning"><td>Pas d'Evenements</td></tr>
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
 {% endblock %}
