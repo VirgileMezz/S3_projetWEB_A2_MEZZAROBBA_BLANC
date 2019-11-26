@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 10%">
 <head>
     <title>Mon Site de E-Commerce</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -18,7 +18,7 @@
     <![endif]-->
     {% include 'nav.html.twig' %}
 </head>
-<body>
+<body style="background-color: whitesmoke">
 {% for message in app.flashes('success') %}
     <div class="alert alert-success">
         {{ message }}
@@ -37,7 +37,7 @@
 <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 {% block javascripts %}{% endblock %}
 </body>
-<footer style="background-color: darkgray; height: 100px">
+<footer style="background-color: darkgray; height: 10%; margin-bottom: 0px;color: white;">
     By Evan BLANC<br>
        & <br>
     Virgile MEZZAROBBA
