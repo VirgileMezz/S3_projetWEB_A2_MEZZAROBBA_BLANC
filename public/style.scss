@@ -1,0 +1,41 @@
+                /*showEventUser*/
+.card {
+    width: 30%; height: 30%;margin-bottom: 2%; margin-left: 2%; float: left;
+    align: center; border-radius: 20px;
+    transition: transform .2s;
+}
+
+.card:hover {
+    transform:scale(1.1);
+}
+
+.qte {
+    margin-left: 5%; width: 2.5em; border-radius: 2px;
+}
+h4 {
+    float: right; margin-right: 2%; color: red;
+}
+
+.userTitle {
+    text-align: center; color: red;
+}
+
+
+          /*showEventAdmin*/
+
+.nom {
+    color: green; font-weight: bold;
+}
+
+.dateEvent {
+    color: blue;
+}
+
+.btn-outline-warning {
+    background-color: whitesmoke; margin-left: 1%
+}
+
+                /*nav*/
+.navButton {
+    margin-left: 20%; background-color: whitesmoke; border-radius: 5px;
+}

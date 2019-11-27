@@ -14,12 +14,12 @@
                 {% for evenement in evenements if evenements is not empty %}
                 <tbody>
                 <tr style="text-align: center">
-                    <td style="color: green; font-weight: bold">{{ evenement.getNom() }}</td>
+                    <td class="nom">{{ evenement.getNom() }}</td>
                     <td>{{ evenement.categorie.libelle }}</td>
-                    <td style="color: blue;">{{ evenement.getDate() | date('d-m-Y')}}</td>
+                    <td class="dateEvent">{{ evenement.getDate() | date('d-m-Y')}}</td>
                     <td>{{ evenement.getDescription() }}</td>
                     <td>{{ evenement.getPhoto()}}</td>
-                    <td>  <img style="width:40px;height:40px" src="{{asset('images/')}}{{evenement.photo}}" alt="image de {{evenement.nom}}" ></td>
+                    <td>  <img width="40px" height="40px" src="{{asset('images/')}}{{evenement.photo}}" alt="image de {{evenement.nom}}" ></td>
                     <td>{{ evenement.getNombrePlaces }}</td>
                     <td style="color: red;">{{ evenement.getPrix() | default('--') }}€</td>
                     <td>

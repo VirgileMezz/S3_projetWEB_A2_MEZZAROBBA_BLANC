@@ -63,4 +63,61 @@ class SecurityController extends AbstractController
         return $this->redirectToRoute('Evenement.showEvenement');
     }
 
+    /**
+     * @Route("/register", name="Security.register",methods={"GET"})
+     */
+    public function register(Request $request, Environment $twig, RegistryInterface $doctrine) {
+
+        return new Response($twig->render('register.html.twig'));
+    }
+
+    /**
+     * @Route("/validRegister", name="Security.validRegister",methods={"POST"})
+     */
+    public function validRegister(Request $request, Environment $twig, RegistryInterface $doctrine)
+    {
+
+        if (!$this->isCsrfTokenValid('formulaire_register_valide', $request->get('token'))) {
+            throw new InvalidCsrfTokenException('Invalid CSRF token');
+        }
+        $donnees['email'] = htmlspecialchars($_POST['email']);
+        $donnees['username'] = htmlspecialchars($_POST['username']);
+        $donnees['password'] = htmlspecialchars($_POST['password']);
+        $donnees['rPassword'] = htmlspecialchars($_POST['rPassword']);
+
+        $erreurs=$this->validDonnees($donnees);
+        if(! empty($erreurs))
+        {
+            $categorie=$doctrine->getRepository(User::class)->findAll([],['id'=>'ASC']);
+            $this->addFlash('error', 'des champs sont mal renseignés !');
+            return $this->render('register.html.twig', ['donnees'=>$donnees,'erreurs'=>$erreurs,'categorie'=> $categorie]);
+        }else {
+            $user=new User();
+            $user->setRole('ROLE_CLIENT');
+            $user->setEmail($donnees['email']);
+            $user->setUsername($donnees['username']);
+            $user->setPassword($donnees['password']);
+            $user->setIsActive(1);
+            $doctrine->getEntityManager()->persist($user);
+            $doctrine->getEntityManager()->flush();
+            $this->addFlash('success', 'client ajouté !');
+            $_SESSION['username']=$user->getUsername();
+            $_SESSION['role']=$user->getRole();
+            return $this->redirectToRoute('Evenement.showEvenement');
+        }
+    }
+    private function validDonnees($donnees) {
+
+        $erreurs = array();
+        if($donnees['email']==null)
+            $erreurs['email']="Saisissez une adresse email";
+        if($donnees['username']==null)
+                $erreurs['username']="Saisissez un nom d'utilisateur";
+        if($donnees['password']==null or $donnees['rPassword']==null)
+            $erreurs['password']="Saisissez un mot de passe";
+        if($donnees['password']!=$donnees['rPassword'])
+            $erreurs['password']="Les deux mots de passe ne sont pas identiques";
+        // a faire : si l'email ou le nom d'utilisateur existe déjà, fail
+        return $erreurs;
+    }
 }

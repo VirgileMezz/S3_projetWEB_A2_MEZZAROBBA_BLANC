@@ -2,23 +2,22 @@
 {% block body %}
 <div class="container">
     <div>
-        <h2 style="text-align: center; color: red">Black Friday !!! du 22 au 29 Novembre | -70%</h2>
+        <h2 class="userTitle">Black Friday !!! du 22 au 29 Novembre | -70%</h2>
 {% for evenement in evenements if evenements is not empty %}
     <div style="margin-top: 5%;">
-        <div class="card" style="width: 30%; height: 30%;margin-bottom: 2%; margin-left: 2%; float: left;
-         align: center; border-radius: 20px ">
+        <div class="card">
             <img width="200px" height="150px" class="card-img-top" src="{{asset('images/')}}{{evenement.photo}}"
                  alt="image de {{evenement.nom}}" style="border-radius: 20px ">
             <div class="card-body">
-                <h5 class="card-title"><div style="color: green;">{{ evenement.nom }}</div> {{ evenement.date | date('d-m-Y')}}</h5>
+                <h5 class="card-title"><div class="nom">{{ evenement.nom }}</div> {{ evenement.date | date('d-m-Y')}}</h5>
                 <p class="card-text">{{ evenement.description }}</p>
                 {% if role=='ROLE_CLIENT' %}
-                    <form action="{#{{ path('panier.ajout',{id: evenement.getId()}) }}#}">
+                    <form class="formButton" action="{#{{ path('panier.ajout',{id: evenement.getId()}) }}#}">
                      <button type="submit" class="btn btn-primary" >Ajouter au Panier</button>
-                        <input type="number" min="1" max="10" value="1" name="qte" style=" margin-left: 5%; width: 2em">
+                        <input class="qte" type="number" min="1" max="10" value="1" name="qte">
                     </form>
                 {% endif %}
-                <h4 style="float: right; margin-right: 2%; color: red;">{{ evenement.prix | default('--')}} $</h4>
+                <h4>{{ evenement.prix | default('--')}} $</h4>
             </div>
         </div>
     </div>

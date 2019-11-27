@@ -1,12 +1,13 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark pink scrolling-navbar" style="text-align: center; background-color: darkgray;  height: 100px;" >
-    <img src="{{ asset('images/logo.png') }}" style="width: 250px; height: 80px; margin-left: 40%">
-    <div style="margin-left: 20%; background-color: white">
+    <img src="{{ asset('images/logo.png') }}" width="250px" height="80pxstyle" style="margin-left: 40%">
+    <div class="navButton">
         {% if session is defined %}
                 {% if session.username==null %}
-                        <a class="btn btn-outline-success my-2 my-sm-0" href="{{ path('Security.login') }}">Se Connecter</a>
+                        <a class="btn btn-outline-success my-2 my-sm-0" style="margin-right: 2%;" href="{{ path('Security.login') }}">Se Connecter</a>
+                        <a class="btn btn-outline-secondary my-2 my-sm-0" href="{{ path('Security.register') }}">S'inscrire</a>
                 {% else %}
                         Bonjour {{ session.username }}
-                    <a class="btn btn-outline-warning" href="{{ path('Security.logout') }}" style="; background-color: white; margin-left: 1%">Se déconnecter</a>
+                    <a class="btn btn-outline-warning" href="{{ path('Security.logout') }}">Se déconnecter</a>
                 {%  endif%}
         {% endif %}
     </div>

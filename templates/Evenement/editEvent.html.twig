@@ -20,7 +20,7 @@
             <div class="form-group">
                 <label>Categorie :</label>
                 <select name="categorie" class="form-control">
-                    <option value="{{ donnees.categorie }}">Veuillez sélectionner une Depense</option>
+                    <option value="{{ donnees.categorie.id }}">Veuillez sélectionner une Catégorie</option>
                     {% for categorieE in categorie %}
                         <option value="{{ categorieE.id |default('')}}">
                             {{ categorieE.libelle }}

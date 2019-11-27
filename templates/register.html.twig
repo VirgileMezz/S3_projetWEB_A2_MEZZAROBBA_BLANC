@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="container">
+        <form method="post" action="{{ path('Security.validRegister') }}">
+            <legend>Inscription</legend>
+            <div class="form-group">
+                <label>Adresse E-mail :</label>
+                <input name="email"  type="text"  size="18" value="{{donnees.username|default('')}}" class="form-control" >
+                {% if erreurs.username is defined %}
+                    <div class="invalid-feedback d-block">{{erreurs.email}}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label>Nom d'utilisateur :</label>
+                <input name="username"  type="text"  size="18" value="{{donnees.username|default('')}}" class="form-control" >
+                {% if erreurs.username is defined %}
+                    <div class="invalid-feedback d-block">{{erreurs.username}}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label>Mot de passe :</label>
+                <input name="password"  type="password"  size="255" value="" class="form-control" >
+                {% if erreurs.password is defined %}
+                    <div class="invalid-feedback d-block">{{erreurs.password}}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label>Repetez le mot de passe :</label>
+                <input name="rPassword"  type="password"  size="255" value="" class="form-control" >
+                {% if erreurs.password is defined %}
+                    <div class="invalid-feedback d-block">{{erreurs.password}}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="token" value="{{ csrf_token('formulaire_register_valide') }}">
+            </div>
+            <button type="submit" class="btn btn-primary">{{ button|default("S'inscrire") }}</button>
+            <a class="btn btn-danger" href="{{ path('Evenement.showEvenement') }}">Retour</a>
+        </form>
+    </div>
+{% endblock %}

@@ -21,6 +21,7 @@
                 <input type="hidden" name="token" value="{{ csrf_token('formulaire_login_valide') }}">
             </div>
             <button type="submit" class="btn btn-primary">{{ button|default('Se connecter') }}</button>
+            <a class="btn btn-danger" href="{{ path('Evenement.showEvenement') }}">Retour</a>
         </form>
     </div>
 {% endblock %}
