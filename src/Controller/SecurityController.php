@@ -20,7 +20,7 @@ class SecurityController extends AbstractController
      */
    public function login(Request $request, Environment $twig, RegistryInterface $doctrine) {
 
-       return new Response($twig->render('login.html.twig'));
+       return new Response($twig->render('User/login.html.twig'));
    }
 
     /**
@@ -40,11 +40,11 @@ class SecurityController extends AbstractController
 
         if(empty($user)) {
             $erreurs['username']='Incorrect username';
-            return $this->render('login.html.twig',['donnees'=>$donnees,'erreurs'=>$erreurs]);
+            return $this->render('User/login.html.twig',['donnees'=>$donnees,'erreurs'=>$erreurs]);
         }
         if($user->getPassword()!=$donnees['password']) {
             $erreurs['password']='Incorrect password';
-            return $this->render('login.html.twig',['donnees'=>$donnees,'erreurs'=>$erreurs]);
+            return $this->render('User/login.html.twig',['donnees'=>$donnees,'erreurs'=>$erreurs]);
         }
 
         $_SESSION['username']=$user->getUsername();
@@ -68,7 +68,7 @@ class SecurityController extends AbstractController
      */
     public function register(Request $request, Environment $twig, RegistryInterface $doctrine) {
 
-        return new Response($twig->render('register.html.twig'));
+        return new Response($twig->render('User/register.html.twig'));
     }
 
     /**
@@ -90,7 +90,7 @@ class SecurityController extends AbstractController
         {
             $categorie=$doctrine->getRepository(User::class)->findAll([],['id'=>'ASC']);
             $this->addFlash('error', 'des champs sont mal renseignés !');
-            return $this->render('register.html.twig', ['donnees'=>$donnees,'erreurs'=>$erreurs,'categorie'=> $categorie]);
+            return $this->render('User/register.html.twig', ['donnees'=>$donnees,'erreurs'=>$erreurs,'categorie'=> $categorie]);
         }else {
             $user=new User();
             $user->setRole('ROLE_CLIENT');

@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="container">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Affichage
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-item">
+                    <a class="btn btn-primary m-1 p-1" href="{{ path('Evenement.showEvenement') }}">Afficher les Evenements</a>
+                </div>
+                <div class="dropdown-item">
+                    <a class="btn btn-primary m-1 p-1" href="{{ path('User.showUser') }}">Afficher les Utilsateurs</a>
+                </div>
+            </div>
+        </li>
+        <div>
+            <h2 style="text-align: center">Récapitulatif des Utilisateurs</h2>
+            <table class="table">
+                <a href="{{ path('user.addUser') }}" class="btn btn-primary m-1 p-1">Ajouter un Utilisateur</a>
+                <thead class="thead-dark">
+                <tr><th style="width: 180px">Nom</th><th>E-mail</th>
+                    <th style=" width: 250px; ">Role</th><th>isActive</th><th>Opération</th>
+                </tr>
+                </thead>
+                {% for user in users if user is not empty %}
+                <tbody>
+                <tr style="text-align: center">
+                    <td class="nom">{{ user.getUsername() }}</td>
+                    <td class="e-mail">{{ user.getEmail() }}</td>
+                    <td>{{ user.getRole()}}</td>
+                    <td>{{ user.getIsActive() }}</td>
+                    <td>
+                        <div style="display: inline-flex">
+                            <a href="{{ path('user.editUser',{id: user.getId()}) }}" class="btn btn-primary" >Modifier</a>
+                            <form onsubmit="return confirm('Voulez-vous vraiment supprimer cet Utilisateur ?');"
+                                  action="{{ path('user.deleteUser',{id: user.getId()}) }}" method="POST">
+                                <input type="hidden" name="token" value="{{ csrf_token('delete_valid') }}">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-primary" style="margin-left: 9%" >Supprimer</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% else %}
+                    <tr class="table-warning"><td>Pas d'Utilisateurs</td></tr>
+                {% endfor %}
+                <tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

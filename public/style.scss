@@ -36,6 +36,15 @@ h4 {
 }
 
                 /*nav*/
+nav {
+    color: darkgray;
+    text-align: center; background-color: darkgray;  height: 100px;
+}
 .navButton {
-    margin-left: 20%; background-color: whitesmoke; border-radius: 5px;
+    margin-left: 18%; background-color: whitesmoke; border-radius: 5px;
+}
+
+.nav-item {
+    margin-left: 15%; background-color: white; border-radius: 5px;
+    width: 10%;
 }

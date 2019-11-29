@@ -5,7 +5,7 @@
             <legend>Inscription</legend>
             <div class="form-group">
                 <label>Adresse E-mail :</label>
-                <input name="email"  type="text"  size="18" value="{{donnees.username|default('')}}" class="form-control" >
+                <input name="email"  type="text"  size="18" value="{{donnees.email|default('')}}" class="form-control" >
                 {% if erreurs.username is defined %}
                     <div class="invalid-feedback d-block">{{erreurs.email}}</div>
                 {% endif %}

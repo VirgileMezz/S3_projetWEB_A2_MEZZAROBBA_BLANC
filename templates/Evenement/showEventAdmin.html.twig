@@ -1,6 +1,19 @@
 {% extends "base.html.twig" %}
 {% block body %}
     <div class="container">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Affichage
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-item">
+                    <a class="btn btn-primary m-1 p-1" href="{{ path('Evenement.showEvenement') }}">Afficher les Evenements</a>
+                </div>
+                <div class="dropdown-item">
+                    <a class="btn btn-primary m-1 p-1" href="{{ path('User.showUser') }}">Afficher les Utilsateurs</a>
+                </div>
+            </div>
+        </li>
         <div>
             <h2 style="text-align: center">Récapitulatif des Evenements</h2>
             <table class="table">
